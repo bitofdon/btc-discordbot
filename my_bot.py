@@ -31,4 +31,14 @@ async def when_moon(ctx):
     #await client.say(random.choice(possible_responses)) - this method is outdated
     await ctx.send(random.choice(possible_responses))
 
+#for Bitcoin - we are using CoinDesk's API - should change to Messari or CMC later
+#on $btc - return value
+@client.command()
+async def btc(ctx):
+    url = 'https://api.coindesk.com/v1/bpi/currentprice.json'
+    response = requests.get(url)
+    value = response.json()['bpi']['USD']['rate']
+    await ctx.send("Bitcoin (BTC): $" + value)
+
+
 client.run(bot_token)
